@@ -1,17 +1,19 @@
-const getRoutes = require('./getRoutes')
+const routes = require('./routes')
 
-module.exports = function handlerMethod(req, res) {
-  const method = req.method
-  if (method === 'GET') {
-    getRoutes(req, res)
-  }
-  if (method === 'POST') {
+const DEFAULT_HEADER = {
+  'Content-Type': 'application/json',
+}
 
-  }
-  if (method === 'DELETE') {
+module.exports = async function handlerMethod(req, res) {
+  const { url, method } = req
+  const [path, route, slug] = url.split('/')
 
-  }
-  if (method === 'PUT') {
+  req.queryString = slug
 
-  }
+  const key = `/${route}:${method}`
+
+  res.writeHead(200, DEFAULT_HEADER)
+
+  const handlerRoute = routes[key] || route.default
+  return await handlerRoute(req, res)
 }

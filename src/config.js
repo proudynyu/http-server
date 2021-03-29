@@ -1,4 +1,4 @@
 module.exports = {
   host: 'localhost',
-  port: 9898
+  port: 9898,
 }
