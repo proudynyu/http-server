@@ -14,6 +14,6 @@ module.exports = async function handlerMethod(req, res) {
 
   res.writeHead(200, DEFAULT_HEADER)
 
-  const handlerRoute = routes[key] || route.default
+  const handlerRoute = routes[key] || routes.default
   return await handlerRoute(req, res)
 }
